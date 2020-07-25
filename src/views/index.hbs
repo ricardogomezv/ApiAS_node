@@ -1,0 +1,97 @@
+<div class="container">
+<img src="t.png" class="rounded float-left"  width="50px" height="50px">
+<h1>TermoUP</h1>
+</div>
+
+<div class="container">
+    <br>
+    <br>
+</div>
+
+<div class="container">
+<div class="card">
+    <div class="card-body">
+        <img src="mail.png" class="rounded float-left" width="40px" height="40px"> <h1>Registro</h1>
+         </div>
+    <div class="card-footer">
+        <form action="/new-usuario" method="POST">
+            <div class="form-group">
+                <input type="text" name="nombre" placeholder="Nombre" class="form-control" autofocus>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="correo" placeholder="Correo para notificar" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="edad" placeholder="Edad" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="genero" placeholder="Genero" class="form-control">
+                </div>
+                <button class="btn btn-primary btn-block">
+                    Agregar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <br>
+    <br>
+</div>
+<div class="container">
+<div class="card">
+    <div class="card">
+        <div class="card-header">
+            <img src="p1.png" class="rounded float-left"  width="50px" height="50px"><h1> Pacientes</h1>
+                </div>
+    <table class="table">
+        <thead>
+        <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>  
+        <th scope="col">Edad</th>
+            <th scope="col">Genero</th> 
+            <th scope="col"> </th>
+        </tr>      
+    
+        {{#if usuario}}
+            <ul class="list-group">
+                {{#each usuario}}
+                    <tr>
+                    <th scope="col">{{nombre}}</th>
+                    <th scope="col">{{correo}}</th>  
+                    <th scope="col">{{edad}} </th>
+                    <th scope="col">{{genero}}</th> 
+                    <th scope="col"><a href="/delete-usuario/{{@key}}" class="btn btn-danger">Borrar</a></th>
+                    </tr>
+                {{/each}}
+            </ul>
+            {{else}}
+                <p>No hay Usuarios Ingresados.</p>
+            {{/if}}
+            </thead>
+        </table>
+    </div>
+
+    <div class="container">
+    <div class="card">
+        <div class="card-header">
+            <img src="p.png" class="rounded float-left"  width="50px" height="50px"><h1> Temperatura<h1>
+                </div>
+    <div class="card-body">
+        {{#if newhistorial}}
+            <ul class="list-group">
+                {{#each newhistorial}}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{temp}}
+                        <a href="/delete-historial/{{@key}}" class="btn btn-danger">Borrar</a>
+                     </li>   
+                    {{/each}}
+                </ul>
+            {{else}}
+                <p>No hay Historial registrado.</p>
+            {{/if}}
+            </div>
+    
+</div>
+</div>
