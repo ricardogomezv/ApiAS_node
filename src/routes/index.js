@@ -14,7 +14,7 @@ const { Router } = require('express');
 const router = Router();
 const bodyParser = require('body-parser');
 
-router.get('/', (req, res) =>{
+router.get('/temperatura-usuario', (req, res) =>{
   
     const promise1 =  new Promise ((resolve, reject) => {
         db.ref('usuario').once('value', (snapshot) =>{
@@ -39,10 +39,11 @@ router.get('/', (req, res) =>{
 
     Promise.all([promise1, promise2]).then(results => {
         if (results [0] && results[1]){
-            res.render('index', {usuario : results[0], newhistorial: results [1]})
+            res.render('temperatura', {usuario : results[0], newhistorial: results [1]})
         } 
     });
 });
+
 
 router.post('/new-usuario', (req,res)=>{
     console.log(req.body);
@@ -53,8 +54,20 @@ router.post('/new-usuario', (req,res)=>{
         genero: req.body.genero, 
     }
     db.ref('usuario').push(newUsuario);
-    res.redirect('/');
+    res.redirect('/temperatura-usuario');
 });
+
+
+router.post('/temperatura-usuario', (req,res)=>{
+    //res.render('temperatura');
+    res.render('temperatura');
+    console.log('whatever endpoint you wantaaaaaaaaaaaaa');
+});
+
+router.get('/', (req, res) => {
+    res.render('index');
+});
+
 
 router.post('/new-historial', (req,res)=>{
     console.log(req.body);
@@ -75,5 +88,6 @@ router.get('/delete-historial/:id', (req, res) => {
     db.ref('newhistorial/' + req.params.id).remove();
     res.redirect('/');
 });
+
 
 module.exports = router;

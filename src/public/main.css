@@ -2,3 +2,11 @@ body {
     background-color: #00B477;
   }
 
+#cajon1{
+float:left;
+height: 100px;
+left: 100px;
+}
+.cajon2{
+float:left;
+}

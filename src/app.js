@@ -18,10 +18,12 @@ app.set('view engine', '.hbs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 
+
 // Routes
 app.use(require('./routes/index'));
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static("views"));
 
 module.exports = app;
